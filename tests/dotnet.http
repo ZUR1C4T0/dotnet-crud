@@ -1,0 +1,25 @@
+@HostAddress = http://localhost:5028/api
+
+GET {{HostAddress}}/users/
+Accept: application/json
+
+###
+
+GET {{HostAddress}}/users/12345678
+Accept: application/json
+
+###
+
+POST {{HostAddress}}/users/
+Content-Type: application/json
+Accept: application/json
+
+{
+    "dni": 73536,
+    "name": "John",
+    "lastName": "Doe",
+    "address": "Fake Street 123",
+    "phone": "123456789"
+}
+
+###
