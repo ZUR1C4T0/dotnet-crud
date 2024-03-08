@@ -11,9 +11,9 @@ public class UsersController(DbAppContext context) : ControllerBase
 {
     private readonly DbAppContext _context = context;
 
-    private bool UserExists(int dni)
+    private bool UserExists(int id)
     {
-        return _context.Users.Any(u => u.Dni == dni);
+        return _context.Users.Any(u => u.Id == id);
     }
 
     [HttpGet]
@@ -60,9 +60,9 @@ public class UsersController(DbAppContext context) : ControllerBase
     [HttpPut("{id}")]
     public async Task<ActionResult<User>> Update(int id, User user)
     {
-        if (id != user.Dni)
+        if (id != user.Id)
         {
-            return BadRequest("DNI in URL and body do not match");
+            return BadRequest("Id in URL and body do not match");
         }
 
         _context.Entry(user).State = EntityState.Modified;
@@ -76,7 +76,7 @@ public class UsersController(DbAppContext context) : ControllerBase
         {
             if (!UserExists(id))
             {
-                return NotFound($"User with DNI {id} not found");
+                return NotFound($"User with Id {id} not found");
             }
             else
             {
@@ -92,7 +92,7 @@ public class UsersController(DbAppContext context) : ControllerBase
 
         if (user == null)
         {
-            return NotFound($"User with DNI {id} not found");
+            return NotFound($"User with Id {id} not found");
         }
 
         _context.Users.Remove(user);
